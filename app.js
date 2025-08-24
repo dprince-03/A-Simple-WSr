@@ -1,21 +1,30 @@
 import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
+import fs from 'fs';
 
 async function fetchWebData() {
     try {
-			const response = await fetch(
-				"https://github.com/dprince-03/A-Simple-WSr"
-			);
+			const response = await fetch("");
 			const body = await response.text();
 			const $ = cheerio.load(body);
-            
-			// const wrapper = $(".px-3");
+
+			// const wrapper = $(``);
 			// console.log(wrapper);
 			// console.log(wrapper.length);
 
 			const items = [];
-			$(".px-3").map((i, el) => {});
-            
+			$(".").map((i, el) => {
+				const elementClass = $(el).find(".").text().trim();
+
+				items.push({
+					elementClass,
+				});
+
+			});
+
+			fs.writeFile('WSRdata.json', JSON.stringify(items, (err) => {}));
+			console.log(items);
+
 		} catch (error) {
         console.error('Error fetching data:', error);
         return;
