@@ -22,7 +22,13 @@ async function fetchWebData() {
 
 			});
 
-			fs.writeFile('WSRdata.json', JSON.stringify(items, (err) => {}));
+			fs.writeFile('WSRdata.json', JSON.stringify(items, (err) => {
+				if (err) {
+					console.log(err, 'Data written to file');
+				}
+
+				console.log('Data written to file');
+			}));
 			console.log(items);
 
 		} catch (error) {
